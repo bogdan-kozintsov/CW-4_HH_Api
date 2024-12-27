@@ -1,6 +1,5 @@
 import json
 
-
 class JSONFileSaver:
     """Класс для сохранения вакансий в JSON-файл"""
 
@@ -8,7 +7,7 @@ class JSONFileSaver:
         """Инициализация JSONFileSaver"""
         self.file_path = file_path
 
-    def save(self, vacancies):
+    def save_to_json(self, vacancies):
         """Сохранение вакансий в JSON-файл"""
         with open(self.file_path, 'w', encoding='utf-8') as f:
             json.dump(vacancies, f, ensure_ascii=False, indent=4)
