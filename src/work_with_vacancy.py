@@ -1,17 +1,26 @@
-def filter_vacancies(vacancies, key_words):
+def filter_by_city(vacancies, city_name):
     """
     Фильтрует список вакансий по ключевым словам в описании.
     """
 
     return [vacancy for vacancy in vacancies if
-            any(key.lower() in vacancy['Вакансия'].lower() for key in key_words)]
+            any(key.title() in vacancy['Город'].title() for key in city_name)]
 
 
-def sort_by_salary(vacancies):
+def filter_by_key_word(vacancies, filter_words):
+    """
+    Фильтрует список вакансий по ключевым словам в описании.
+    """
+
+    return [vacancy for vacancy in vacancies if
+            any(key.lower() in vacancy['Вакансия'].lower() for key in filter_words)]
+
+
+def sort_by_min_salary(vacancies):
     """
     Сортирует список вакансий по убыванию зарплаты.
     """
-    return sorted(vacancies, key=lambda vacancy: vacancy['Зарплата'], reverse=True)
+    return sorted(vacancies, key=lambda vacancy: vacancy['Зарплата от'], reverse=True)
 
 
 def get_top_vacancies(vacancies, upper_part):
@@ -27,20 +36,14 @@ def print_vacancies(vacancies):
     """
     if vacancies:
         for index, vacancy in enumerate(vacancies, start=1):
-            # print(f"Вакансия {index}:")
-            # print(f"Название: {vacancy.get('name', 'Не указано')}")
-            # print(f"Зарплата от: {vacancy.get('salary_from', 'Не указана')}")
-            # print(f"Описание: {vacancy.get('description', 'Отсутствует')}")
-            # print(f"Ссылка: {vacancy.get('alternate_url', 'Не указана')}")
-            # print()
-            print(f"Вакансия {index}: {vacancy.get('Вакансия')}\n"
-                  f"Работодатель {vacancy.get('Работодатель')}\n"
-                  f"Город {vacancy.get('Город')}\n"
-                  f"Зарплата {vacancy.get('Зарплата')}\n"
-                  f"Ссылка на вакансию {vacancy.get('Ссылка на вакансию')}\n")
+            print(f"\nВакансия: {index}: {vacancy.get('Вакансия')}\n"
+                  f"Работодатель - {vacancy.get('Работодатель')}\n"
+                  f"Город - {vacancy.get('Город')}\n"
+                  # f"Зарплата: {vacancy.get('Зарплата')} {vacancy.get('Валюта')}\n"
+                  f"Зарплата от {vacancy.get('Зарплата от')} до {vacancy.get('Зарплата до')} {vacancy.get('Валюта')}\n"
+                  # f"Средняя зарплата: {vacancy.get('Средняя зарплата')} {vacancy.get('Валюта')}\n"
+                  f"Ссылка на вакансию: {vacancy.get('Ссылка на вакансию')}")
 
-
-
-        print(f"Всего вакансий: {len(vacancies)}")
+        print(f"\nВсего вакансий: {len(vacancies)}")
     else:
         print("Нет подходящих вакансий")

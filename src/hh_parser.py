@@ -21,7 +21,7 @@ class HH:
         """Инициализация клиента для работы с API HeadHunter"""
         self.url = 'https://api.hh.ru/vacancies'
         self.headers = {'User-Agent': 'HH-User-Agent'}
-        self.params = {'text': '', 'page': 0, 'per_page': 100, 'area': 113, 'salary': 100000, 'only_with_salary': True}
+        self.params = {'text': '', 'page': 0, 'per_page': 100, 'only_with_salary': True, 'area': 113}
         self.vacancies = []
 
     def load_vacancies(self, keyword):
@@ -32,4 +32,3 @@ class HH:
             vacancies = response.json()['items']
             self.vacancies.extend(vacancies)
             self.params['page'] += 1
-

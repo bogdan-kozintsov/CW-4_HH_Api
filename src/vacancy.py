@@ -1,5 +1,3 @@
-from src.hh_parser import HH
-
 class Vacancy:
     """Класс для представления вакансии"""
 
@@ -8,24 +6,14 @@ class Vacancy:
         self.name = name
         self.alternate_url = alternate_url
         self.area = area['name']
-        self.salary_from = salary.get('from')
-        self.salary_to = salary.get('to')
-        self.salary = \
-            f'{self.salary_from} - {self.salary_to} {currency}' if self.salary_from and self.salary_to else 'Не указано'
+        self.salary_from = salary.get('from') if salary.get('from') else 0
+        self.salary_to = salary.get('to') if salary.get('to') else '"всё зависит только от тебя"'
+        # self.salary = \
+        #     f'{self.salary_from} - {self.salary_to}' if self.salary_from or self.salary_to else 0
+        # self.avg_salary = int((self.salary_from + self.salary_to) / 2) \
+        #     if self.salary_from != 0 and self.salary_to != 0 else self.salary
+        self.currency = currency
         self.employer = employer['name']
-
-
-    # def to_list(self):
-    #     """Получение списка вакансиq"""
-    #     hh = HH()
-    #     vacancy_objects = []
-    #     for vacancy in hh.vacancies:
-    #         vacancy_objects.append(Vacancy(vacancy["name"],
-    #                                        vacancy["alternate_url"],
-    #                                        vacancy["area"],
-    #                                        vacancy["salary"],
-    #                                        vacancy["salary"]["currency"],
-    #                                        vacancy["employer"]))
 
 
     def to_dict(self):
@@ -34,7 +22,11 @@ class Vacancy:
             'Вакансия': self.name,
             'Работодатель': self.employer,
             'Город': self.area,
-            'Зарплата': self.salary,
+            # 'Зарплата': self.salary,
+            'Зарплата от': self.salary_from,
+            'Зарплата до': self.salary_to,
+            'Валюта': self.currency,
+            # 'Средняя зарплата': self.avg_salary,
             'Ссылка на вакансию': self.alternate_url
         }
 
@@ -43,8 +35,10 @@ class Vacancy:
         return (f'Название: {self.name}\n'
                 f'URL: {self.alternate_url}\n'
                 f'Area: {self.area}\n'
-                f'Salary: {self.salary}\n'
+                f'Salary_from: {self.salary_from}\n'
+                f'Salary_to: {self.salary_to}\n'
+                f'Currency: {self.currency}\n'
                 f'Employer: {self.employer}')
 
     def __lt__(self, other):
-        return self.salary < other.salary
+        return self.salary_from < other.salary_from
