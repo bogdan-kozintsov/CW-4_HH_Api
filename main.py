@@ -16,10 +16,10 @@ def user_interaction():
 
     hh = HH()
     sever = JSONFileSaver('C:/Users/denis.shtepa/bogdan.kozintsov/CodePractice/CW-4_HH_Api/data/vacancies.json')
-    hh.load_vacancies(search_query)
+    hh._load_vacancies(search_query)
 
     vacancy_objects = []
-    for vacancy in hh.vacancies:
+    for vacancy in hh._vacancies:
         vacancy_objects.append(Vacancy(vacancy["name"],
                                        vacancy["alternate_url"],
                                        vacancy["area"],
