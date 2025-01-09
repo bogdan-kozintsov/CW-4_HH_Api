@@ -6,12 +6,12 @@ class Parser(ABC):
     """Абстрактный класс для парсинга вакансий"""
 
     @abstractmethod
-    def load_vacancies(self):
+    def load_vacancies(self, keyword):
         """Загрузка вакансий из API"""
         pass
 
 
-class HH:
+class HH(Parser):
     """
     Класс для работы с API HeadHunter
     Класс Parser является родительским классом, который вам необходимо реализовать
