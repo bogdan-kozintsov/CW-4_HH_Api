@@ -15,7 +15,6 @@ class Vacancy:
         self.currency = currency
         self.employer = employer['name']
 
-
     def to_dict(self):
         """Получение словаря вакансии в формате JSON"""
         return {

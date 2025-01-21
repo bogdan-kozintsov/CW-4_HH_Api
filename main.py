@@ -15,8 +15,8 @@ def user_interaction():
     filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
 
     hh = HH()
-    sever = JSONFileSaver('C:/Users/denis.shtepa/bogdan.kozintsov/CodePractice/CW-4_HH_Api/data/vacancies.json')
-    hh._load_vacancies(search_query)
+    sever = JSONFileSaver('data/vacancies.json')
+    hh.load_vacancies(search_query)
 
     vacancy_objects = []
     for vacancy in hh._vacancies:
