@@ -7,7 +7,7 @@ class Vacancy:
         self.alternate_url = alternate_url
         self.area = area['name']
         self.salary_from = salary.get('from') if salary.get('from') else 0
-        self.salary_to = salary.get('to') if salary.get('to') else '"всё зависит только от тебя"'
+        self.salary_to = salary.get('to') if salary.get('to') else '...'
         # self.salary = \
         #     f'{self.salary_from} - {self.salary_to}' if self.salary_from or self.salary_to else 0
         # self.avg_salary = int((self.salary_from + self.salary_to) / 2) \

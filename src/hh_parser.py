@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class Parser(ABC):
-    """Абстрактный класс для парсинга вакансий"""
+    """Абстрактный родительский класс для работы с API"""
 
     @abstractmethod
     def load_vacancies(self, keyword):
@@ -12,10 +12,7 @@ class Parser(ABC):
 
 
 class HH(Parser):
-    """
-    Класс для работы с API HeadHunter
-    Класс Parser является родительским классом, который вам необходимо реализовать
-    """
+    """Класс для работы с API HeadHunter"""
 
     def __init__(self):
         """Инициализация клиента для работы с API HeadHunter"""

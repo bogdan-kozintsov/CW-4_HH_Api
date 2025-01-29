@@ -15,7 +15,7 @@ def user_interaction():
     filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
 
     hh = HH()
-    sever = JSONFileSaver('data/vacancies.json')
+    sever = JSONFileSaver()
     hh.load_vacancies(search_query)
 
     vacancy_objects = []
@@ -38,6 +38,7 @@ def user_interaction():
     sorted_vacancies = sort_by_min_salary(filtered_by_key_word)  # Сортировка по минимальной зарплате
     top_vacancies = get_top_vacancies(sorted_vacancies, top_n)  # Выборка топ N отсортированных вакансий
     print_vacancies(top_vacancies)  # Вывод выборки вакансий в консоль
+    sever.delete_from_json()  # Очистка списка вакансий для повторного использования
 
 
 if __name__ == '__main__':
