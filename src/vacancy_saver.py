@@ -35,9 +35,9 @@ class JSONFileSaver(FileSaver):
 
     def get_from_json(self):
         """Загрузка вакансий из JSON-файла"""
-        pass
+        with open(self.__file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
     def delete_from_json(self):
         """Удаление вакансий из JSON-файла"""
         open(self.__file_path, 'w').close()
-

@@ -1,6 +1,6 @@
 from src.hh_parser import HH
-from src.vacancy_saver import JSONFileSaver
 from src.vacancy import Vacancy
+from src.vacancy_saver import JSONFileSaver
 from src.work_with_vacancy import filter_by_city, filter_by_key_word, sort_by_min_salary, get_top_vacancies, \
     print_vacancies
 
@@ -32,6 +32,7 @@ def user_interaction():
         vacancy_dicts.append(vacancy_object.to_dict())
 
     sever.save_to_json(vacancy_dicts)  # Сохранение вакансий в JSON-файл
+    # print(sever.get_from_json())  # Загрузка вакансий из JSON-файла
 
     filtered_by_city = filter_by_city(vacancy_dicts, city_name)  # Фильтр по городу
     filtered_by_key_word = filter_by_key_word(filtered_by_city, filter_words)  # Фильтр по ключевым словам в названии
