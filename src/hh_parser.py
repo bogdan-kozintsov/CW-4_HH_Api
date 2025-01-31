@@ -21,6 +21,10 @@ class HH(Parser):
         self.__params = {'text': '', 'page': 0, 'per_page': 100, 'only_with_salary': True, 'area': 113}
         self._vacancies = []
 
+    @property
+    def vacancies(self):
+        return self._vacancies
+
     def load_vacancies(self, keyword):
         """Загрузка вакансий с поискового запроса"""
         self.__params['text'] = keyword

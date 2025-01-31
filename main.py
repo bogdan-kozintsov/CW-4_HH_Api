@@ -19,7 +19,7 @@ def user_interaction():
     hh.load_vacancies(search_query)
 
     vacancy_objects = []
-    for vacancy in hh._vacancies:
+    for vacancy in hh.vacancies:
         vacancy_objects.append(Vacancy(vacancy["name"],
                                        vacancy["alternate_url"],
                                        vacancy["area"],
