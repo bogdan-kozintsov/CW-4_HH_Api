@@ -11,9 +11,9 @@ def user_interaction():
     """
     search_query = input("Введите поисковый запрос: ")
     top_n = int(input("Введите количество вакансий для вывода в топ N: "))
-    city_name = input("Укажите город для фильтрации вакансий: ").split()
-    filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
-
+    city_name = input("Укажите город для фильтрации вакансий: ")
+    filter_words = input("Введите ключевые слова для фильтрации вакансий по названию: ").split(",")
+    print(filter_words)
     hh = HH()
     sever = JSONFileSaver()
     hh.load_vacancies(search_query)
@@ -24,7 +24,6 @@ def user_interaction():
                                        vacancy["alternate_url"],
                                        vacancy["area"],
                                        vacancy["salary"],
-                                       vacancy["salary"]["currency"],
                                        vacancy["employer"]))
 
     vacancy_dicts = []
