@@ -1,6 +1,6 @@
 from src.hh_parser import HH
-from src.vacancy_saver import JSONFileSaver
 from src.vacancy import Vacancy
+from src.vacancy_saver import JSONFileSaver
 from src.work_with_vacancy import filter_by_city, filter_by_key_word, sort_by_min_salary, get_top_vacancies, \
     print_vacancies
 
@@ -11,11 +11,11 @@ def user_interaction():
     """
     search_query = input("Введите поисковый запрос: ")
     top_n = int(input("Введите количество вакансий для вывода в топ N: "))
-    city_name = input("Укажите город для фильтрации вакансий: ").split()
-    filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
-
+    city_name = input("Укажите город для фильтрации вакансий: ")
+    filter_words = input("Введите ключевые слова для фильтрации вакансий по названию: ").split(",")
+    print(filter_words)
     hh = HH()
-    sever = JSONFileSaver('C:/Users/denis.shtepa/bogdan.kozintsov/CodePractice/CW-4_HH_Api/data/vacancies.json')
+    sever = JSONFileSaver()
     hh.load_vacancies(search_query)
 
     vacancy_objects = []
@@ -24,7 +24,6 @@ def user_interaction():
                                        vacancy["alternate_url"],
                                        vacancy["area"],
                                        vacancy["salary"],
-                                       vacancy["salary"]["currency"],
                                        vacancy["employer"]))
 
     vacancy_dicts = []
@@ -32,12 +31,14 @@ def user_interaction():
         vacancy_dicts.append(vacancy_object.to_dict())
 
     sever.save_to_json(vacancy_dicts)  # Сохранение вакансий в JSON-файл
+    # print(sever.get_from_json())  # Загрузка вакансий из JSON-файла
 
     filtered_by_city = filter_by_city(vacancy_dicts, city_name)  # Фильтр по городу
     filtered_by_key_word = filter_by_key_word(filtered_by_city, filter_words)  # Фильтр по ключевым словам в названии
     sorted_vacancies = sort_by_min_salary(filtered_by_key_word)  # Сортировка по минимальной зарплате
     top_vacancies = get_top_vacancies(sorted_vacancies, top_n)  # Выборка топ N отсортированных вакансий
     print_vacancies(top_vacancies)  # Вывод выборки вакансий в консоль
+    sever.delete_from_json()  # Очистка списка вакансий для повторного использования
 
 
 if __name__ == '__main__':

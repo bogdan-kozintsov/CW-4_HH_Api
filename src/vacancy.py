@@ -1,20 +1,15 @@
 class Vacancy:
     """Класс для представления вакансии"""
 
-    def __init__(self, name, alternate_url, area, salary, currency, employer):
+    def __init__(self, name, alternate_url, area, salary, employer):
         """Инициализация вакансии"""
         self.name = name
         self.alternate_url = alternate_url
         self.area = area['name']
         self.salary_from = salary.get('from') if salary.get('from') else 0
-        self.salary_to = salary.get('to') if salary.get('to') else '"всё зависит только от тебя"'
-        # self.salary = \
-        #     f'{self.salary_from} - {self.salary_to}' if self.salary_from or self.salary_to else 0
-        # self.avg_salary = int((self.salary_from + self.salary_to) / 2) \
-        #     if self.salary_from != 0 and self.salary_to != 0 else self.salary
-        self.currency = currency
+        self.salary_to = salary.get('to') if salary.get('to') else '...'
+        self.currency = salary.get('currency') if salary.get('currency') else 'у/е'
         self.employer = employer['name']
-
 
     def to_dict(self):
         """Получение словаря вакансии в формате JSON"""
@@ -22,11 +17,9 @@ class Vacancy:
             'Вакансия': self.name,
             'Работодатель': self.employer,
             'Город': self.area,
-            # 'Зарплата': self.salary,
             'Зарплата от': self.salary_from,
             'Зарплата до': self.salary_to,
             'Валюта': self.currency,
-            # 'Средняя зарплата': self.avg_salary,
             'Ссылка на вакансию': self.alternate_url
         }
 
