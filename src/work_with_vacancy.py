@@ -12,7 +12,7 @@ def filter_by_key_word(vacancies, filter_words):
     """
 
     return [vacancy for vacancy in vacancies if
-            any(key.lower() in vacancy['Вакансия'].lower() for key in filter_words)]
+            all(key.lower() in vacancy['Вакансия'].lower() for key in filter_words)]
 
 
 def sort_by_min_salary(vacancies):

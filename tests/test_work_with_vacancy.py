@@ -19,8 +19,9 @@ def test_filter_by_key_word():
                  {'Вакансия': 'Разработчик Java'},
                  {'Вакансия': 'Тестировщик'},
                  {'Вакансия': 'Менеджер проектов'}]
-    # assert len(filter_by_key_word(vacancies, "Разработчик")) == 2
+    assert len(filter_by_key_word(vacancies, "Разработчик")) == 2
     assert len(filter_by_key_word(vacancies, "Тестировщик")) == 1
+    assert len(filter_by_key_word(vacancies, ["Разработчик", "Python"])) == 1
 
 
 def test_sort_by_min_salary():
